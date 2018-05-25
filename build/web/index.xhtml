@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      
+        <h:form>
+            <h:panelGrid id="hardisk" columns="1" cellpadding="1" cellspacing="1">
+                 <h:messages />
+            
+            <h:outputLabel value="#{ege.a}">
+                <f:convertNumber minFractionDigits="2"  />
+            </h:outputLabel>
+            <br/>
+            <h:outputLabel value="#{ege.b}">
+                <f:convertNumber  pattern="0.00" />
+            </h:outputLabel>
+            <br/>
+            <h:outputText value="#{ege.c}">
+                <f:convertNumber currencySymbol="$" type="currency" />
+            </h:outputText>
+            <br/>
+            <h:outputText value="#{ege.d}">
+                <f:convertNumber type="percent" />
+            </h:outputText>
+            <br/>
+            
+            <h:inputText value="#{ege.tarih1}" label="Tarih işlemi" >
+                <f:passThroughAttribute name="placeholder" value="22.09.1992" />
+                <f:convertDateTime pattern="dd.mm.yyyy"  />
+                <f:ajax  execute="@form" render="@form" />    
+            </h:inputText>
+            <br/>
+            
+            <h:inputText id="email2" value="#{ege.email}">
+                <f:passThroughAttribute  name="placeholder" value="Düzgün gir mail olarak" />
+                <f:passThroughAttribute name="type" value="email" />
+            </h:inputText>
+            <br/>
+            
+            Numara 1 : <h:inputText value="#{ege.e}"  label="Numara 1 VERIMSIZ" >
+                <f:validateLength minimum="5" />
+                <f:ajax  execute="@form" render="@form" />
+            </h:inputText>  <br/>
+            
+            Numara 2 : <h:inputText id="numara2" value="#{ege.k}"  required="true" label="Numara 2 Verimsiz">
+            
+                 <f:validateDoubleRange  minimum="40.05" maximum="75.12" />
+                 <f:ajax execute="@form" render="@form" />
+            </h:inputText>   <br/>
+          
+            Yazı 1 : <h:inputText value="#{ege.yazi1}" label="Yazı al 1"  validatorMessage="Yazı degil bu" >
+                <f:passThroughAttribute name="placeholder" value="bitişik büyük harf giriniz" />
+                          <f:validateRegex  pattern="[\w\.-]*[A-Z]" />
+                          <f:ajax  execute="@form" render="@form" />
+                    </h:inputText> <br/>
+                    
+         Numara 3 : <h:inputText value="#{ege.f}" label="Numara 3">
+                               <f:validateLongRange  minimum="9" maximum="48" />
+                               <f:ajax  event="keyup" render="@form" />
+                    </h:inputText>       
+            
+         Yazı 2 : <h:inputText value="#{ege.yazi2}" label="Yazı 2 (Rakam olmak zorunda)">
+                        <f:convertNumber />    
+                        <f:ajax  event="keyup" execute="@form" render="@form" />
+                 </h:inputText>
+         
+                 
+         <f:loadBundle var="degisken" basename="com.cokelek.tatlim" />
+         <p>#{degisken.yetmedi}</p> /
+         <p>#{degisken["gercek"]}</p> /
+         <p>#{degisken.bak}</p>  /
+         <p>#{degisken['kim']}</p>/
+             
+        
+       
+        
+            </h:panelGrid>
+            
+            <h:selectOneListbox  value="#{ege.yazi3}" valueChangeListener="#{ege.degisenVeri}">
+             
+             <f:ajax  execute="@form" render="@form" />
+             
+             <f:selectItem itemLabel="Hibernate" itemValue="Hibernate" />
+             <f:selectItem itemLabel="JSF"  itemValue="JSF"/>
+             <f:selectItem itemLabel="Spring" itemValue="Spring" />
+         </h:selectOneListbox>
+        </h:form>
+        
+        
+    </h:body>
+</html>
+
